@@ -1,10 +1,33 @@
 const cards = document.querySelectorAll(".card");
 
 const observer = new IntersectionObserver(entries => {
-    console.log(entries);
+    console.log(entries);      // * For #Reference1
     // entries will always be an array. It's an array of everything that has changed its observation, essentially if it's intersecting or not within that period of time.
 
-    /** 
+    entries.forEach(entry => {
+        entry.target.classList.toggle("show", entry.isIntersecting)
+    })
+});
+
+cards.forEach(card => {
+    observer.observe(card);
+})
+
+/**
+ * This callback we pass to IntersectionObserver will be called, every single time something you're observing changes its intersection. 
+ * 
+ * This callback take some options, that is used to, how you as a developer wants to configure it
+ * 
+ * This callback takes a list of entries. These entries are all the things that have changed. The things that have intersected or unintersected.
+ * 
+ * What "observer.observe(cards[0])" will do is; Observe when cards[0] changes its intersections
+ * 
+ */
+
+/** 
+     * 
+     * For #Reference1
+     * 
         [{
             boundingClientRect : DOMRectReadOnly {x: 8, y: 8, width: 145.09375, height: 36.5, top: 8, …}
             intersectionRatio : 1
@@ -30,22 +53,7 @@ const observer = new IntersectionObserver(entries => {
      */
     
     /** ----------------------------------------------------------------------------------- */
-    
+
     /**
      * Our logic will be, if isIntersecting is true, we'll add "show" css class and if it is false, we'll remove the show class.
      */
-
-});
-
-observer.observe(cards[0]);
-
-/**
- * This callback we pass to IntersectionObserver will be called, every single time something you're observing changes its intersection. 
- * 
- * This callback take some options, that is used to, how you as a developer wants to configure it
- * 
- * This callback takes a list of entries. These entries are all the things that have changed. The things that have intersected or unintersected.
- * 
- * What "observer.observe(cards[0])" will do is; Observe when cards[0] changes its intersections
- * 
- */
