@@ -101,9 +101,5 @@ cards.forEach(card => {
      *      Instead of appearing at the moment when isIntersecting true, when it's about 100px more to scroll to get that card on screen, it will be loaded and when user reaches that point, it'll already available or loaded before reaching that point.
      * 
      *      It helps in pre-loading of images. As images are heavy in size, it takes time to load from the server. Hence the dowloading from server will be initiated even before there's 100px for user to scroll.
-     *  
-     *      
-     *      
-     *      
      * 
      */
