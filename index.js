@@ -7,6 +7,7 @@ const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         // toggle is a inbuilt method on DOMTokenList class - Refer to this https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle
         entry.target.classList.toggle("show", entry.isIntersecting)
+        if(entry.isIntersecting) observer.unobserve(entry.target);
     })
 },{
   threshold: 1  
@@ -67,4 +68,14 @@ cards.forEach(card => {
 
     /**
      * Our logic will be, if isIntersecting is true, we'll add "show" css class and if it is false, we'll remove the show class.
+     */
+
+    /**
+     *  if(entry.isIntersecting) observer.unobserve(entry.target);
+     *  
+     *  Before adding this line, we are toggling the show class again to off which changes is opacity to 0 as we scroll down the top elements are going out of the visible area.
+     * 
+     * But in real-life scenarios like in Facebook posts, top elements are never deleted or removed from browser. User can scroll down and again scroll up to see the posts again he has already seen.
+     * 
+     * So to implement similar effect, we are unobserving the elements once their isIntersecting is true.
      */
