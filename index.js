@@ -5,8 +5,11 @@ const observer = new IntersectionObserver(entries => {
     // entries will always be an array. It's an array of everything that has changed its observation, essentially if it's intersecting or not within that period of time.
 
     entries.forEach(entry => {
+        // toggle is a inbuilt method on DOMTokenList class - Refer to this https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle
         entry.target.classList.toggle("show", entry.isIntersecting)
     })
+},{
+  threshold: 1  
 });
 
 cards.forEach(card => {
@@ -19,6 +22,14 @@ cards.forEach(card => {
  * This callback take some options, that is used to, how you as a developer wants to configure it
  * 
  * This callback takes a list of entries. These entries are all the things that have changed. The things that have intersected or unintersected.
+ * 
+ * IntersectionObserver also takes a config object apart from callback in 2nd arg.
+ * 
+ * threshold is one such config whose value varies from 0 to 1.
+ * 
+ * threshold: We're setting threshold only to show our animation properly. By default threshold is 0 and with that threshold value, as soon as a single pexel of the element is visible (when we scroll, new elements loaded, when single pixel of new element is visible), it'll turn isIntersecting property for that entry to true. As soon as it's border entered to visible area of browser.
+ * 
+ * Based on isIntersecting we're adding and removing 'show' css class. So, by setting threshold to 1, we're adding the animation to new element and removing animation from top element when 100% of new element is in visible area of browser screen.
  * 
  * What "observer.observe(cards[0])" will do is; Observe when cards[0] changes its intersections
  * 
