@@ -10,7 +10,10 @@ const observer = new IntersectionObserver(entries => {
         if(entry.isIntersecting) observer.unobserve(entry.target);
     })
 },{
-  rootMargin: ''  
+    threshold:1
+    // rootMargin: '100px'  
+    // root: 
+    // root property identifies the Element or Document whose bounds are treated as the bounding box of the viewport for the element which is the observer's target.
 });
 
 cards.forEach(card => {
