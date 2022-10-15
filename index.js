@@ -36,6 +36,8 @@ const lastCardObserver = new IntersectionObserver(entries => {
     loadNewCards();
     lastCardObserver.unobserve(lastCard.target);
     lastCardObserver.observe(document.querySelector(".card:last-child")); // Only make the last card as our target to observe
+},{
+    rootMargin: '100px'
 })
 
 lastCardObserver.observe(document.querySelector(".card:last-child")); // Only make the last card as our target to observe
