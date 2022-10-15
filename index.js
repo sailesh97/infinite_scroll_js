@@ -37,7 +37,7 @@ const lastCardObserver = new IntersectionObserver(entries => {
     lastCardObserver.unobserve(lastCard.target);
     lastCardObserver.observe(document.querySelector(".card:last-child")); // Only make the last card as our target to observe
 },{
-    rootMargin: '100px'
+    rootMargin: '100px' // Load next set of conetent from api, when user is 100px away from target.
 })
 
 lastCardObserver.observe(document.querySelector(".card:last-child")); // Only make the last card as our target to observe
