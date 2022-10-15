@@ -21,6 +21,37 @@ cards.forEach(card => {
 })
 
 /**
+ * Adding Lazyloading
+ * 
+ * the 1st observer we made above is only responsible for showing/hiding existing card divs
+ * 
+ * Let's insert new html elements/fetch some data from a api and render it, when we reach to last element of browser visible area. 
+ * 
+ * Let's create a new observer for this task. (Separation of concerns)
+ */
+
+const lastCardObserver = new IntersectionObserver(entries => {
+    const lastCard = entries[0];
+    if(!lastCard.isIntersecting) return;
+    loadNewCards();
+    lastCardObserver.unobserve(lastCard.target);
+    lastCardObserver.observe(document.querySelector(".card:last-child")); // Only make the last card as our target to observe
+})
+
+lastCardObserver.observe(document.querySelector(".card:last-child")); // Only make the last card as our target to observe
+
+const cardContainer = document.querySelector('.card-container');
+function loadNewCards(){
+    for (let i = 0; i < 10; i++) {
+        const card = document.createElement("div");
+        card.textContent = "New Card";
+        card.classList.add("card");
+        observer.observe(card); // For toggling "show" css class
+        cardContainer.append(card);
+    }
+}
+
+/**
  * This callback we pass to IntersectionObserver will be called, every single time something you're observing changes its intersection. 
  * 
  * This callback take some options, that is used to, how you as a developer wants to configure it
