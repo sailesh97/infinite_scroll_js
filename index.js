@@ -10,7 +10,7 @@ const observer = new IntersectionObserver(entries => {
         if(entry.isIntersecting) observer.unobserve(entry.target);
     })
 },{
-  threshold: 1  
+  rootMargin: ''  
 });
 
 cards.forEach(card => {
@@ -78,4 +78,32 @@ cards.forEach(card => {
      * But in real-life scenarios like in Facebook posts, top elements are never deleted or removed from browser. User can scroll down and again scroll up to see the posts again he has already seen.
      * 
      * So to implement similar effect, we are unobserving the elements once their isIntersecting is true.
+     */
+
+    /**
+     *  Like threshold, another important property is rootMargin, whose value can be in pixels, whether in +ve or -ve doesn't matter.
+     *  this allows us to essentially offset when something will happen
+     * 
+     *  Let's remove threshold and add rootMargin in configs for a moment
+     * 
+     *  If -ve value: let say -100px
+     *      our container is now 100 pixels smaller than it normally would be.
+     * 
+     *      So from the top & bottom of our container we're essentially subtracting 100 pixels.
+     * 
+     *      So now everything that's going to be leaving that container is leaving it 100 pixels earlier and down here everything is coming in 100 pixels earlier.
+     * 
+     *      So using negative numbers we can kind of shrink our container and make things do whatever we want before they actually leave or before they enter.
+     * 
+     * If +ve value, let say +100px
+     *      all the animations are playing when the element is 100 pixels away from becoming/appearing on the screen.
+     * 
+     *      Instead of appearing at the moment when isIntersecting true, when it's about 100px more to scroll to get that card on screen, it will be loaded and when user reaches that point, it'll already available or loaded before reaching that point.
+     * 
+     *      It helps in pre-loading of images. As images are heavy in size, it takes time to load from the server. Hence the dowloading from server will be initiated even before there's 100px for user to scroll.
+     *  
+     *      
+     *      
+     *      
+     * 
      */
